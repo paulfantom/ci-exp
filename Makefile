@@ -34,7 +34,10 @@ vendor: $(JB_BIN) jsonnetfile.json jsonnetfile.lock.json
 	$(JB_BIN) install
 
 crdschemas: vendor
-	./scripts/generate-schemas.sh	
+	./scripts/generate-schemas.sh
+
+jsonnet/kube-prometheus/versions.json:
+	./scripts/generate-versions.sh > jsonnet/kube-prometheus/versions.json
 
 .PHONY: validate
 validate: crdschemas manifests $(KUBECONFORM_BIN)
