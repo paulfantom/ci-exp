@@ -1,14 +1,16 @@
 #!/bin/bash
 
+set -euo pipefail
+
 get_latest_version() {
   echo >&2 "Checking release version for ${1}"
-  curl --retry 5 --silent -H "Authorization: token $token" "https://api.github.com/repos/${1}/releases/latest" | jq '.tag_name' | tr -d '"v'
+  curl --retry 5 --silent --fail -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${1}/releases/latest" | jq '.tag_name' | tr -d '"v'
 }
 
 # token can be passed as `GITHUB_TOKEN` or `token` variable
-#token=${token:-${GITHUB_TOKEN}}
+GITHUB_TOKEN=${GITHUB_TOKEN:-${token}}
 
-#if [ -z "$token" ]; then
+#if [ -z "$GITHUB_TOKEN" ]; then
 #	echo >&2 "GITHUB_TOKEN not set. Exiting"
 #	exit 1
 #fi
