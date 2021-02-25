@@ -7,8 +7,8 @@ get_latest_version() {
   curl --retry 5 --silent --fail -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/repos/${1}/releases/latest" | jq '.tag_name' | tr -d '"v'
 }
 
-# token can be passed as `GITHUB_TOKEN` or `token` variable
-GITHUB_TOKEN=${GITHUB_TOKEN:-${token}}
+# token can be passed as `GITHUB_TOKEN` variable or passed as first argument
+GITHUB_TOKEN=${GITHUB_TOKEN:-${1}}
 
 #if [ -z "$GITHUB_TOKEN" ]; then
 #	echo >&2 "GITHUB_TOKEN not set. Exiting"

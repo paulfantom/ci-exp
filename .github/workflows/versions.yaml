@@ -14,5 +14,5 @@ jobs:
     - uses: romoh/dependencies-autoupdate@v1.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        update-command: "'scripts/generate-versions.sh > jsonnet/kube-prometheus/versions.json'"
+        update-command: "'scripts/generate-versions.sh $token > jsonnet/kube-prometheus/versions.json'"
         on-changes-command: "'make --always-make generate'"
