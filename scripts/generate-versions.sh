@@ -1,6 +1,7 @@
 #!/bin/bash
 
 get_latest_version() {
+  echo >&2 "Checking release version for ${1}"
   curl --retry 5 --silent -H "Authorization: token $token" "https://api.github.com/repos/${1}/releases/latest" | jq '.tag_name' | tr -d '"v'
 }
 
@@ -8,13 +9,13 @@ get_latest_version() {
 token=${token:-${GITHUB_TOKEN}}
 
 if [ -z "$token" ]; then
-	echo "GITHUB_TOKEN not set. Exiting"
+	echo >&2 "GITHUB_TOKEN not set. Exiting"
 	exit 1
 fi
 
 cat <<-EOF
 {
-  "alertmanager": "$(get_latest_version "prometheus/alertmanager")"
+  "alertmanager": "$(get_latest_version "prometheus/alertmanager")",
   "blackboxExporter": "$(get_latest_version "prometheus/blackbox_exporter")",
   "grafana": "$(get_latest_version "grafana/grafana")",
   "nodeExporter": "$(get_latest_version "prometheus/node_exporter")",
