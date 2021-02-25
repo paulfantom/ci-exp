@@ -15,4 +15,5 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         update-command: 'make --always-make jsonnet/kube-prometheus/versions.json'
+        update-path: '.'
         on-changes-command: 'make --always-make generate'
