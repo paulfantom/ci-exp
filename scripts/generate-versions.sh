@@ -6,12 +6,12 @@ get_latest_version() {
 }
 
 # token can be passed as `GITHUB_TOKEN` or `token` variable
-token=${token:-${GITHUB_TOKEN}}
+#token=${token:-${GITHUB_TOKEN}}
 
-if [ -z "$token" ]; then
-	echo >&2 "GITHUB_TOKEN not set. Exiting"
-	exit 1
-fi
+#if [ -z "$token" ]; then
+#	echo >&2 "GITHUB_TOKEN not set. Exiting"
+#	exit 1
+#fi
 
 cat <<-EOF
 {
